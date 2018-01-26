@@ -1,0 +1,51 @@
+target/
+!/profile-server/.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+
+# Frontend sources
+/profile-admin/node_modules
+/profile-admin/tmp
+/profile-admin/e2e/*.js
+/profile-admin/e2e/*.map
+/profile-admin/npm-debug.log
+/profile-admin/typings
+/profile-admin/.sass-cache
+/profile-admin/connect.lock
+/profile-admin/coverage/*
+/profile-admin/libpeerconnection.log
+/profile-admin/testem.log
+
+# Frontend sources
+/profile-front/node_modules
+/profile-front/tmp
+/profile-front/e2e/*.js
+/profile-front/e2e/*.map
+/profile-front/npm-debug.log
+/profile-front/typings
+/profile-front/.sass-cache
+/profile-front/connect.lock
+/profile-front/coverage/*
+/profile-front/libpeerconnection.log
+/profile-front/testem.log
