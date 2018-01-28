@@ -19,9 +19,9 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.loginService.sendCredencials(this.credential.username, this.credential.password).subscribe(
       res => {
-        localStorage.setItem("xAuthToken", res.token);
-        this.loggedId = true;
-        location.reload();
+          localStorage.setItem("xAuthToken", res.token);
+          this.loggedId = true;
+          location.reload();
       },
       error => {
         if (error.status === 401) {

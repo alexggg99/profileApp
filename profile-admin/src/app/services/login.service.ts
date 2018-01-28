@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import {RequestOptions, Response } from '@angular/http';
+import {RequestOptions, Response, Headers, Http } from '@angular/http';
 import { HttpHeaders } from "@angular/common/http";
+import { Token } from "../model/token";
 
 import { Observable } from 'rxjs/Observable';
 import {HttpClient} from "@angular/common/http";
@@ -18,7 +19,7 @@ export class LoginService {
       'Content-Type' : 'application/x-www-form-urlencoded',
       'Authorization': basicHeader
     });
-    return this.http.get(url, {headers: headers});
+    return this.http.get<Token>(url, {headers: headers});
   }
 
   checkSession() {
