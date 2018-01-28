@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
       res => {
           localStorage.setItem("xAuthToken", res.token);
           this.loggedId = true;
-          location.reload();
+          window.location.href = '/';
       },
       error => {
         if (error.status === 401) {

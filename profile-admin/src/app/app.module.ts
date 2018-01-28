@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from "@angular/forms";
+import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule, MatCheckboxModule, MatToolbarModule, MatFormFieldModule } from '@angular/material';
 import { routing } from './app.routing'
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
@@ -13,13 +14,16 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { LoginService} from "./services/login.service";
+import { AdminHomeComponent } from './components/admin-home/admin-home.component';
+import {AuthGuardService} from "./services/auth-guard.service";
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    NavBarComponent
+    NavBarComponent,
+    AdminHomeComponent
   ],
   imports: [
     HttpClientModule,
@@ -32,9 +36,10 @@ import { LoginService} from "./services/login.service";
     MatFormFieldModule,
     FormsModule,
     MatSlideToggleModule,
-    MatInputModule
+    MatInputModule,
+    MatCardModule
   ],
-  providers: [LoginService],
+  providers: [LoginService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

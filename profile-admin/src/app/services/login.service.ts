@@ -24,17 +24,25 @@ export class LoginService {
 
   checkSession() {
     let url = 'http://localhost:8181/session/user';
-    let headers = new HttpHeaders({
-      'x-auth-token': localStorage.getItem('xAuthToken')
-    });
-    return this.http.get(url, {headers: headers});
+    let token = localStorage.getItem('xAuthToken');
+    let headers = new HttpHeaders();
+    if (token) {
+      headers = new HttpHeaders({
+        'x-auth-token': token
+      });
+    }
+    return this.http.get(url, {headers: headers, responseType: 'text'});
   }
 
   logout() {
     let url = 'http://localhost:8181/session/logout';
-    let headers = new HttpHeaders({
-      'x-auth-token' : localStorage.getItem('xAuthToken')
-    });
+    let token = localStorage.getItem('xAuthToken');
+    let headers = new HttpHeaders();
+    if (token) {
+      headers = new HttpHeaders({
+        'x-auth-token': token
+      });
+    }
     return this.http.post(url, {},{headers: headers});
   }
 
