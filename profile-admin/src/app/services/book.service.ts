@@ -1,18 +1,22 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders } from "@angular/common/http";
 
 import {HttpClient} from "@angular/common/http";
-import {AuthGuardService} from "./auth-guard.service";
 import {Book} from "../model/book";
+import {GlobalVariable} from "./global.variable ";
 
 @Injectable()
 export class BookService {
 
-  constructor(private http: HttpClient, private auth: AuthGuardService) { }
+  constructor(private http: HttpClient, private gv: GlobalVariable) { }
 
   getBooks() {
-    let url = 'http://localhost:9000/books';
-    return this.http.get<Book>(url, {responseType: 'json'});
+    let url = this.gv.bookResource + '/books';
+    return this.http.get<Book[]>(url, {responseType: 'json'});
+  }
+
+  getBook(id:number) {
+    let url = this.gv.bookResource + '/books/'+id;
+    return this.http.get<Book>(url);
   }
 
 }

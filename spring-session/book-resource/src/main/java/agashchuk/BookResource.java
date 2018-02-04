@@ -7,14 +7,21 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.session.data.redis.config.ConfigureRedisAction;
 import org.springframework.session.web.http.HeaderHttpSessionStrategy;
-import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 public class BookResource extends WebSecurityConfigurerAdapter {
 
+	private static final String[] PUBLIC_MATCHERS = {
+			"/image/**",
+			"/book/**"
+	};
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.cors().and().authorizeRequests().anyRequest().authenticated();
+		http.cors();
+		http
+				.authorizeRequests()
+				.antMatchers(PUBLIC_MATCHERS).permitAll().anyRequest().authenticated();
 	}
 
 	@Bean

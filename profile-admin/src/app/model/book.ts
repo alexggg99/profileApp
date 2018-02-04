@@ -4,8 +4,8 @@ export class Book {
   public author: string;
   public publisher: string;
   public publishDate: string;
-  public language: string;
-  public category: string;
+  public lang: string;
+  public category: any;
   public numberOfPages: number;
   public listPrice: number;
   public ourPrice: number;

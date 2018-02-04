@@ -9,6 +9,8 @@ import {MatButtonModule, MatCheckboxModule, MatToolbarModule, MatFormFieldModule
 import { routing } from './app.routing'
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatInputModule} from '@angular/material';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatListModule} from "@angular/material";
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -20,6 +22,8 @@ import {AuthGuardService} from "./services/auth-guard.service";
 import { BookListComponent } from './components/book-list/book-list.component';
 
 import { httpInterceptorProviders} from "./components/interceptors/index";
+import { ViewBookComponent } from './components/view-book/view-book.component';
+import { GlobalVariable } from "./services/global.variable ";
 
 @NgModule({
   declarations: [
@@ -27,7 +31,8 @@ import { httpInterceptorProviders} from "./components/interceptors/index";
     LoginComponent,
     NavBarComponent,
     AdminHomeComponent,
-    BookListComponent
+    BookListComponent,
+    ViewBookComponent
   ],
   imports: [
     HttpClientModule,
@@ -41,9 +46,11 @@ import { httpInterceptorProviders} from "./components/interceptors/index";
     FormsModule,
     MatSlideToggleModule,
     MatInputModule,
-    MatCardModule
+    MatCardModule,
+    MatGridListModule,
+    MatListModule
   ],
-  providers: [LoginService, AuthGuardService, BookService, httpInterceptorProviders],
+  providers: [LoginService, AuthGuardService, BookService, httpInterceptorProviders, GlobalVariable],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

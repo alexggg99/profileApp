@@ -7,15 +7,15 @@ import {catchError} from "rxjs/operators";
 import { HttpErrorResponse } from "@angular/common/http";
 import { ErrorObservable } from "rxjs/observable/ErrorObservable";
 import { Router } from "@angular/router";
-import {AuthGuardService} from "./auth-guard.service";
+import {GlobalVariable} from "./global.variable ";
 
 @Injectable()
 export class LoginService {
 
-  constructor(private http: HttpClient, private router: Router, private authService: AuthGuardService) { }
+  constructor(private http: HttpClient, private router: Router, private gv: GlobalVariable) { }
 
   sendCredencials(username: string, password: string) {
-    let url = 'http://localhost:8181/session/token';
+    let url = this.gv.serverResource + '/session/token';
     let encodedCredentials = btoa(username+":"+password);
     let basicHeader = "Basic "+encodedCredentials;
     let headers = new HttpHeaders({
@@ -26,13 +26,13 @@ export class LoginService {
   }
 
   checkSession() {
-    let url = 'http://localhost:8181/session/user';
+    let url = this.gv.serverResource + '/session/user';
     let headers = new HttpHeaders();
     return this.http.get(url, {headers: headers, responseType: 'text'}).pipe(catchError(this.handleError));
   }
 
   logout() {
-    let url = 'http://localhost:8181/session/logout';
+    let url = this.gv.serverResource + '/session/logout';
     let headers = new HttpHeaders();
     return this.http.post(url, {},{headers: headers});
   }
