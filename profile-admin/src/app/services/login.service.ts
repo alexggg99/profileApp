@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
-import {RequestOptions, Response, Headers, Http } from '@angular/http';
 import { HttpHeaders } from "@angular/common/http";
 import { Token } from "../model/token";
 
-import { Observable } from 'rxjs/Observable';
 import {HttpClient} from "@angular/common/http";
+import {catchError} from "rxjs/operators";
+import { HttpErrorResponse } from "@angular/common/http";
+import { ErrorObservable } from "rxjs/observable/ErrorObservable";
+import { Router } from "@angular/router";
+import {AuthGuardService} from "./auth-guard.service";
 
 @Injectable()
 export class LoginService {
 
-  constructor(private http: HttpClient ) { }
+  constructor(private http: HttpClient, private router: Router, private authService: AuthGuardService) { }
 
   sendCredencials(username: string, password: string) {
     let url = 'http://localhost:8181/session/token';
@@ -24,27 +27,40 @@ export class LoginService {
 
   checkSession() {
     let url = 'http://localhost:8181/session/user';
-    let token = localStorage.getItem('xAuthToken');
     let headers = new HttpHeaders();
-    if (token) {
-      headers = new HttpHeaders({
-        'x-auth-token': token
-      });
-    }
-    return this.http.get(url, {headers: headers, responseType: 'text'});
+    return this.http.get(url, {headers: headers, responseType: 'text'}).pipe(catchError(this.handleError));
   }
 
   logout() {
     let url = 'http://localhost:8181/session/logout';
-    let token = localStorage.getItem('xAuthToken');
     let headers = new HttpHeaders();
-    if (token) {
-      headers = new HttpHeaders({
-        'x-auth-token': token
-      });
-    }
     return this.http.post(url, {},{headers: headers});
   }
+
+  private handleError(error: HttpErrorResponse) {
+    let self = this;
+    if (error.error instanceof ErrorEvent) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error.message);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong,
+      console.log(
+        `Backend returned code ${error.status}, ` +
+        `body was: ${error.error}`);
+      if (JSON.parse(error.error).status == 401) {
+        //Unauthorized
+        if (localStorage.getItem('xAuthToken')) {
+          localStorage.removeItem('xAuthToken')
+          location.reload();
+          this.router.navigate([]);
+        }
+      }
+    }
+    // return an ErrorObservable with a user-facing error message
+    return new ErrorObservable(
+      'Something bad happened; please try again later.');
+  };
 
 
 }

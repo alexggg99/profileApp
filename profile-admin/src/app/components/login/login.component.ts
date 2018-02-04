@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../services/login.service';
 import { Router } from '@angular/router';
+import {AuthGuardService} from "../../services/auth-guard.service";
 
 @Component({
   selector: 'app-login',
@@ -14,12 +15,13 @@ export class LoginComponent implements OnInit {
   private badCredentials = false;
 
   constructor(private loginService: LoginService,
-              private router: Router) { }
+              private router: Router,
+              private auth: AuthGuardService) { }
 
   onSubmit() {
     this.loginService.sendCredencials(this.credential.username, this.credential.password).subscribe(
       res => {
-          localStorage.setItem("xAuthToken", res.token);
+          this.auth.setToken(res);
           this.loggedId = true;
           window.location.href = '/';
       },

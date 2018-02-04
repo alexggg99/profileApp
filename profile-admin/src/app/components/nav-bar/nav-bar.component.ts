@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService} from "../../services/login.service";
 import {Router} from "@angular/router";
+import {AuthGuardService} from "../../services/auth-guard.service";
 
 @Component({
   selector: 'app-nav-bar',
@@ -11,7 +12,7 @@ export class NavBarComponent implements OnInit {
 
   private isLoggedIn = false;
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private loginService: LoginService, private router: Router, private auth: AuthGuardService) { }
 
   toggleDisplay() {
     this.isLoggedIn = !this.isLoggedIn;
@@ -31,9 +32,10 @@ export class NavBarComponent implements OnInit {
   logout() {
     this.loginService.logout().subscribe(
       res => {
-        localStorage.removeItem("xAuthToken");
-        location.reload();
-        this.router.navigate([]);
+        if (this.auth.removeToken()) {
+          location.reload();
+          this.router.navigate([]);
+        }
       },
       error => {
         console.log(error);

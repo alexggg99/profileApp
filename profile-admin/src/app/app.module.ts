@@ -14,16 +14,20 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { LoginService} from "./services/login.service";
+import { BookService } from "./services/book.service";
 import { AdminHomeComponent } from './components/admin-home/admin-home.component';
 import {AuthGuardService} from "./services/auth-guard.service";
+import { BookListComponent } from './components/book-list/book-list.component';
 
+import { httpInterceptorProviders} from "./components/interceptors/index";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     NavBarComponent,
-    AdminHomeComponent
+    AdminHomeComponent,
+    BookListComponent
   ],
   imports: [
     HttpClientModule,
@@ -39,7 +43,7 @@ import {AuthGuardService} from "./services/auth-guard.service";
     MatInputModule,
     MatCardModule
   ],
-  providers: [LoginService, AuthGuardService],
+  providers: [LoginService, AuthGuardService, BookService, httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
