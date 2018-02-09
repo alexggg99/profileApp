@@ -1,0 +1,20 @@
+<div class="container aligner">
+  <div class="centered-container">
+    <span id="err" [hidden]="!badCredentials"><small>Error</small></span>
+    <div *ngIf="!loggedId" class="login-container" [style.margin-top]="'45px'">
+            <form role="form" (submit)="onSubmit()">
+              <mat-form-field>
+                <input matInput required [(ngModel)]="credential.username" id="username" name="username" placeholder="username">
+              </mat-form-field><br>
+              <mat-form-field>
+                <input matInput required [(ngModel)]="credential.password" id="password" name="password" placeholder="password">
+              </mat-form-field><br>
+              <mat-slide-toggle color="primary"><small>Remember me!</small></mat-slide-toggle>
+
+              <br>
+              <button mat-raised-button type="submit" color="primary" name="login" [style.margin-top]="'14px'">login</button><br><br>
+            </form >
+      user / user
+    </div>
+  </div>
+</div>

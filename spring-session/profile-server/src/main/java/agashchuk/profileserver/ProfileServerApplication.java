@@ -38,11 +38,21 @@ public class ProfileServerApplication implements CommandLineRunner {
 		admin.setUsername("admin");
 		admin.setPassword(SecurityUtility.passwordEncoder().encode("admin"));
 		admin.setEmail("admin@admin");
-		Set<UserRole> userRoles = new HashSet<>();
+		Set<UserRole> adminRoles = new HashSet<>();
 		Role roleAdmin = new Role();
 		roleAdmin.setName("ROLE_ADMIN");
-		userRoles.add(new UserRole(admin, roleAdmin));
-		userService.createUser(admin, userRoles);
+		adminRoles.add(new UserRole(admin, roleAdmin));
+		userService.createUser(admin, adminRoles);
+
+		User user = new User();
+		user.setUsername("user");
+		user.setPassword(SecurityUtility.passwordEncoder().encode("user"));
+		user.setEmail("user@user");
+		Set<UserRole> userRoles = new HashSet<>();
+		Role userRole = new Role();
+		userRole.setName("ROLE_USER");
+		userRoles.add(new UserRole(user, userRole));
+		userService.createUser(user, userRoles);
 	}
 
 	@Bean
