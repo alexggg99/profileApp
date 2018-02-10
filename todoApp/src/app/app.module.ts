@@ -13,6 +13,7 @@ import { LoginComponent } from './components/login/login.component';
 import { LoginService } from "./services/login.service";
 import { AuthGuardService } from "./services/auth-guard.service";
 import { GroupService } from "./services/group.service";
+import { TodoService } from "./services/todo.service";
 
 import { httpInterceptorProviders} from "./components/interceptors/index";
 import { GlobalVariable } from "./services/global.variable ";
@@ -105,7 +106,7 @@ export class MaterialModule {}
       MatNativeDateModule,
       routing
   ],
-    providers: [LoginService, AuthGuardService, GroupService, httpInterceptorProviders, GlobalVariable],
+    providers: [LoginService, AuthGuardService, GroupService, TodoService, httpInterceptorProviders, GlobalVariable],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

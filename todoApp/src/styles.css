@@ -4,3 +4,11 @@ body {
     font-family: Roboto, Arial, sans-serif;
     margin: 0;
 }
+
+.menu-active {
+    background: #ffd740;
+}
+
+.mat-list-item-focus {
+    background: #ffd740 !important;
+}

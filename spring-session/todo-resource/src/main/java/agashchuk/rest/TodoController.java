@@ -4,9 +4,10 @@ import agashchuk.model.Todo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestWrapper;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -19,8 +20,8 @@ public class TodoController {
     private final TodoRepository todoRepository;
 
     @RequestMapping
-    public List<Todo> getAll() {
-        return (List<Todo>) todoRepository.findAll();
+    public List<Todo> getAll(@RequestParam long groupId, Principal principal) {
+        return (List<Todo>)todoRepository.findByUserNameAndGroup(principal.getName(), groupId);
     }
 
     @RequestMapping("/{id}")

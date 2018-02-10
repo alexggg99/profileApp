@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
       res => {
           this.auth.setToken(res);
           this.loggedId = true;
-          window.location.href = '/';
+          window.location.href = '';
       },
       error => {
         if (error.status === 401) {

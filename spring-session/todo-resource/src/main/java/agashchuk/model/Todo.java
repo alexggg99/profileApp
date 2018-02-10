@@ -1,10 +1,12 @@
 package agashchuk.model;
 
 import agashchuk.profileserver.security.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity(name = "todo")
 @Data
@@ -16,7 +18,8 @@ public class Todo {
     @ManyToOne
     @JoinColumn(name = "user_id")
     public User user;
-    public String createdAt;
+    public Date createdAt;
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id")
     public Group group;

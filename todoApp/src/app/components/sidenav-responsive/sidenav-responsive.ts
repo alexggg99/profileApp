@@ -38,7 +38,6 @@ export class SidenavResponsive implements OnInit, OnDestroy {
             res => {
                 this.isLoggedIn = true;
                 this.groupService.getGroups().subscribe(res => res.forEach(group => {
-                    console.log(group);
                     this.groups.push(group)
                 }))
             },

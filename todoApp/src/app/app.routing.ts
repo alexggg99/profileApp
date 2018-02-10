@@ -6,23 +6,14 @@ import { DashboardComponent } from "./components/dashboard/dashboard.component";
 
 const appRoutes: Routes = [
   {
-    path : '',
-    component: DashboardComponent,
-    canActivate: [AuthGuardService]
-  },
-  {
     path: 'login',
     component: LoginComponent
   },
-    {
-        path: 'books',
-        component: LoginComponent
-    },
   {   path: 'group/:id',
       component: DashboardComponent,
       canActivate: [AuthGuardService]
   },
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: 'group/1' }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
