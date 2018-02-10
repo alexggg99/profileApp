@@ -14,6 +14,14 @@ const appRoutes: Routes = [
     path: 'login',
     component: LoginComponent
   },
+    {
+        path: 'books',
+        component: LoginComponent
+    },
+  {   path: 'group/:id',
+      component: DashboardComponent,
+      canActivate: [AuthGuardService]
+  },
   { path: '**', redirectTo: '' }
 ];
 

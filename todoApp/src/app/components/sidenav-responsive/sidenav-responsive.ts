@@ -3,6 +3,7 @@ import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import { LoginService } from "../../services/login.service";
 import {AuthGuardService} from "../../services/auth-guard.service";
 import {Router} from "@angular/router";
+import {GroupService} from "../../services/group.service";
 
 /** @title Responsive sidenav */
 @Component({
@@ -18,8 +19,11 @@ export class SidenavResponsive implements OnInit, OnDestroy {
 
     private _mobileQueryListener: () => void;
 
+    private groups = [];
+
     constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,
-                private loginService: LoginService, private auth: AuthGuardService, private router: Router) {
+                private loginService: LoginService, private auth: AuthGuardService,
+                private router: Router, private groupService: GroupService) {
         this.mobileQuery = media.matchMedia('(max-width: 600px)');
         this._mobileQueryListener = () => changeDetectorRef.detectChanges();
         this.mobileQuery.addListener(this._mobileQueryListener);
@@ -33,6 +37,10 @@ export class SidenavResponsive implements OnInit, OnDestroy {
         this.loginService.checkSession().subscribe(
             res => {
                 this.isLoggedIn = true;
+                this.groupService.getGroups().subscribe(res => res.forEach(group => {
+                    console.log(group);
+                    this.groups.push(group)
+                }))
             },
             error => {
                 this.isLoggedIn = false;

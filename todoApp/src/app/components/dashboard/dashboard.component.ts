@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../services/login.service';
-import { Router } from '@angular/router';
+import {Params, Router} from '@angular/router';
+import { ActivatedRoute } from "@angular/router";
 import {AuthGuardService} from "../../services/auth-guard.service";
 
 @Component({
@@ -14,9 +15,12 @@ export class DashboardComponent implements OnInit {
   private loggedId = false;
   private badCredentials = false;
 
+  private groupId: number;
+
   constructor(private loginService: LoginService,
               private router: Router,
-              private auth: AuthGuardService) { }
+              private auth: AuthGuardService,
+              private activeRouter: ActivatedRoute) { }
 
   onSubmit() {
     this.loginService.sendCredencials(this.credential.username, this.credential.password).subscribe(
@@ -32,18 +36,19 @@ export class DashboardComponent implements OnInit {
         }
       }
     );
-
   }
 
   ngOnInit() {
     this.loginService.checkSession().subscribe(
       res => {
         this.loggedId = true;
-    },
-      error => {
-        this.loggedId = false;
+      },
+        error => {
+          this.loggedId = false;
       }
     );
+      this.activeRouter.params.forEach((params:Params) => {
+        this.groupId = Number.parseInt(params['id']);
+      })
   }
-
 }
