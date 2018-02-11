@@ -24,6 +24,7 @@ public class Todo {
     @JoinColumn(name = "group_id")
     public Group group;
     public boolean done;
+    public String description;
     @Transient
     private MultipartFile file;
 

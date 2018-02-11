@@ -10,6 +10,7 @@ import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { AppComponent } from './app.component';
 import { SidenavResponsive } from "./components/sidenav-responsive/sidenav-responsive";
 import { LoginComponent } from './components/login/login.component';
+import {DetailsComponent} from "./components/dashboard/todo-details/details.component";
 import { LoginService } from "./services/login.service";
 import { AuthGuardService } from "./services/auth-guard.service";
 import { GroupService } from "./services/group.service";
@@ -95,7 +96,7 @@ export class MaterialModule {}
 
 @NgModule({
   declarations: [
-    AppComponent, DashboardComponent, LoginComponent, SidenavResponsive
+    AppComponent, DashboardComponent, LoginComponent, SidenavResponsive, DetailsComponent
   ],
   imports: [
       BrowserModule,

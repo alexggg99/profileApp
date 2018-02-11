@@ -45,4 +45,12 @@ export class DashboardComponent implements OnInit {
       this.todoService.getTodoByGroupId(this.groupId).subscribe(res => res.forEach(todo => this.todos.push(todo)))
     })
   }
+
+  editDetails() {
+  }
+
+  addTodo() {
+    this.router.navigate(['new', { groupId: this.groupId }] )
+  }
+
 }

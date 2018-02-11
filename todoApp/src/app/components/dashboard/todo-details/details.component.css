@@ -1,0 +1,31 @@
+.container-todo-details {
+    padding: 12px;
+    height: 97%;
+    width: 60%;
+    margin: auto;
+}
+
+@media (max-width: 672px) {
+    .container-todo-details {
+        width: 97%;
+        padding: 5px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+    }
+}
+
+.header-image {
+    background-image:   url(assets/images/stickyNote.png);
+    background-size: cover;
+}
+
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.example-full-width {
+    width: 100%;
+}
