@@ -17,7 +17,7 @@ import { GroupService } from "./services/group.service";
 import { TodoService } from "./services/todo.service";
 
 import { httpInterceptorProviders} from "./components/interceptors/index";
-import { GlobalVariable } from "./services/global.variable ";
+import { APP_CONFIG, END_POINT_CONFIG } from "./services/app.config";
 import { CdkTableModule } from '@angular/cdk/table';
 
 import {
@@ -107,7 +107,14 @@ export class MaterialModule {}
       MatNativeDateModule,
       routing
   ],
-    providers: [LoginService, AuthGuardService, GroupService, TodoService, httpInterceptorProviders, GlobalVariable],
+  providers: [
+      LoginService,
+      AuthGuardService,
+      GroupService,
+      TodoService,
+      httpInterceptorProviders,
+      { provide: APP_CONFIG, useValue: END_POINT_CONFIG }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

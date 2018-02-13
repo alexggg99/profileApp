@@ -1,17 +1,18 @@
 import 'rxjs/add/operator/map'
-import { Injectable } from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 
 import {HttpClient} from "@angular/common/http";
 import {Group} from "../model/group";
-import {GlobalVariable} from "./global.variable ";
+import {AppConfig} from "./app-config";
+import {APP_CONFIG} from "./app.config";
 
 @Injectable()
 export class GroupService {
 
-  constructor(private http: HttpClient, private gv: GlobalVariable) { }
+  constructor(private http: HttpClient, @Inject(APP_CONFIG) private config: AppConfig) { }
 
   getGroups() {
-    let url = this.gv.serverTodo + '/group';
+    let url = this.config.serverTodo + '/group';
     return this.http.get<Group[]>(url).map(result => {
         result.forEach(res => {
           res.url = '/group/' + res.id;
@@ -21,7 +22,7 @@ export class GroupService {
   }
 
   getGroup(id:number) {
-    let url = this.gv.serverTodo + '/group/'+id;
+    let url = this.config.serverTodo + '/group/'+id;
     return this.http.get<Group>(url);
   }
 

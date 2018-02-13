@@ -1,28 +1,29 @@
 import 'rxjs/add/operator/map'
-import { Injectable } from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 
 import {HttpClient} from "@angular/common/http";
 import { Todo } from "../model/todo";
-import {GlobalVariable} from "./global.variable ";
 import { HttpParams } from "@angular/common/http";
+import {AppConfig} from "./app-config";
+import {APP_CONFIG} from "./app.config";
 
 @Injectable()
 export class TodoService {
 
-  constructor(private http: HttpClient, private gv: GlobalVariable) { }
+  constructor(private http: HttpClient, @Inject(APP_CONFIG) private config: AppConfig) { }
 
   getTodos(id:number) {
-    let url = this.gv.serverTodo + '/todo';
+    let url = this.config.serverTodo + '/todo';
     return this.http.get<Todo[]>(url);
   }
 
   getTodo(id:number) {
-    let url = this.gv.serverTodo + '/todo/'+id;
+    let url = this.config.serverTodo + '/todo/'+id;
     return this.http.get<Todo>(url);
   }
 
   getTodoByGroupId(id:number) {
-        let url = this.gv.serverTodo + '/todo';
+        let url = this.config.serverTodo + '/todo';
         return this.http.get<Todo[]>(url, {params: new HttpParams().append('groupId', '' + id)});
   }
 

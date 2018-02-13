@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import { HttpHeaders } from "@angular/common/http";
 import { Token } from "../model/token";
 
@@ -7,15 +7,16 @@ import {catchError} from "rxjs/operators";
 import { HttpErrorResponse } from "@angular/common/http";
 import { ErrorObservable } from "rxjs/observable/ErrorObservable";
 import { Router } from "@angular/router";
-import {GlobalVariable} from "./global.variable ";
+import {AppConfig} from "./app-config";
+import {APP_CONFIG} from "./app.config";
 
 @Injectable()
 export class LoginService {
 
-  constructor(private http: HttpClient, private router: Router, private gv: GlobalVariable) { }
+  constructor(private http: HttpClient, private router: Router, @Inject(APP_CONFIG) private config: AppConfig) { }
 
   sendCredencials(username: string, password: string) {
-    let url = this.gv.serverResource + '/session/token';
+    let url = this.config.serverResource + '/session/token';
     let encodedCredentials = btoa(username+":"+password);
     let basicHeader = "Basic "+encodedCredentials;
     let headers = new HttpHeaders({
@@ -26,13 +27,13 @@ export class LoginService {
   }
 
   checkSession() {
-    let url = this.gv.serverResource + '/session/user';
+    let url = this.config.serverResource + '/session/user';
     let headers = new HttpHeaders();
     return this.http.get(url, {headers: headers, responseType: 'text'}).pipe(catchError(this.handleError));
   }
 
   logout() {
-    let url = this.gv.serverResource + '/session/logout';
+    let url = this.config.serverResource + '/session/logout';
     let headers = new HttpHeaders();
     return this.http.post(url, {},{headers: headers});
   }
