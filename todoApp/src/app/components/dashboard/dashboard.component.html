@@ -2,12 +2,7 @@
     <div class="container-todo Aligner-item--top">
       <mat-grid-list cols="1" rowHeight="36px" >
           <mat-grid-tile *ngFor="let todo of todos">
-              <div class="todo-flex">
-                  <div class="todo-row-container">
-                     <input type="checkbox" class="done-checkbox"/> {{todo.title}}
-                  </div>
-                <i class="material-icons edit" (click)="editDetails()">edit</i>
-              </div>
+              <todo-row style='width: 100%' [todo]="todo" (onDelete)="delete($event)"></todo-row>
           </mat-grid-tile>
       </mat-grid-list>
     </div>

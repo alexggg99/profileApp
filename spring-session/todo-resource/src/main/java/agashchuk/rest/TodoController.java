@@ -40,12 +40,12 @@ public class TodoController {
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> deleteTodo(@PathVariable long id) {
+    public ResponseEntity<Long> deleteTodo(@PathVariable long id) {
         if (!todoRepository.exists(id)) {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         } else {
             todoRepository.delete(id);
-            return new ResponseEntity(HttpStatus.OK);
+            return new ResponseEntity(id, HttpStatus.OK);
         }
     }
 

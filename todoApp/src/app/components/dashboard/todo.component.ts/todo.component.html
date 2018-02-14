@@ -1,0 +1,7 @@
+<div class="todo-flex">
+  <div class="todo-row-container">
+    <input type="checkbox" class="done-checkbox"/> {{todo.title}}
+  </div>
+  <i class="material-icons edit" (click)="edit()">edit</i>
+  <i class="material-icons delete" (click)="delete(todo.id)">delete</i>
+</div>

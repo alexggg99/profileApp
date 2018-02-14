@@ -10,26 +10,32 @@ import {APP_CONFIG} from "./app.config";
 @Injectable()
 export class TodoService {
 
-  constructor(private http: HttpClient, @Inject(APP_CONFIG) private config: AppConfig) { }
+  private url
+
+  constructor(private http: HttpClient, @Inject(APP_CONFIG) private config: AppConfig) {
+      this.url = this.config.serverTodo + '/todo';
+  }
 
   getTodos(id:number) {
-    let url = this.config.serverTodo + '/todo';
-    return this.http.get<Todo[]>(url);
+    return this.http.get<Todo[]>(this.url);
   }
 
   getTodo(id:number) {
-    let url = this.config.serverTodo + '/todo/'+id;
+    let url = this.url + '/todo/'+id;
     return this.http.get<Todo>(url);
   }
 
   getTodoByGroupId(id:number) {
-        let url = this.config.serverTodo + '/todo';
-        return this.http.get<Todo[]>(url, {params: new HttpParams().append('groupId', '' + id)});
+        return this.http.get<Todo[]>(this.url, {params: new HttpParams().append('groupId', '' + id)});
   }
 
   saveTodo(todo: Todo) {
-    let url = this.config.serverTodo + '/todo'
-    return this.http.post<Todo>(url, todo);
+    return this.http.post<Todo>(this.url, todo);
+  }
+
+  deleteTodo(todoId: number) {
+    let url = this.url + '/'+todoId;
+    return this.http.delete<number>(url);
   }
 
 }

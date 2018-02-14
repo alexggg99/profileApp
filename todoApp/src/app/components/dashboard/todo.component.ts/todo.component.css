@@ -1,0 +1,31 @@
+todo-row {
+    width: 100%;
+}
+
+.todo-row-container {
+    width: 100%;
+}
+
+.done-checkbox {
+    margin-right: 10px;
+}
+
+.todo-flex {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    width: 100%;
+    padding: 3px;
+    align-items: flex-end;
+}
+
+.material-icons.edit {
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.material-icons.delete {
+    margin-right: 10px;
+    cursor: pointer;
+}

@@ -1,17 +1,23 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, HostBinding, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import { AuthGuardService } from "../../../services/auth-guard.service";
 import { Todo } from "../../../model/todo";
 import { GroupService } from "../../../services/group.service";
 import { TodoService } from "../../../services/todo.service";
 import {Group} from "../../../model/group";
+import {slideInDownAnimation} from "../../../animations";
 
 @Component({
   selector: 'todo-details',
   templateUrl: './details.component.html',
-  styleUrls: ['./details.component.css']
+  styleUrls: ['./details.component.css'],
+    animations: [ slideInDownAnimation ]
 })
 export class DetailsComponent implements OnInit {
+    @HostBinding('@routeAnimation') routeAnimation = true;
+    @HostBinding('style.display')   display = 'block';
+    @HostBinding('style.position')  position = 'absolute';
+    @HostBinding('style.width')  width = '100%';
 
   @Input() todo: Todo;
 

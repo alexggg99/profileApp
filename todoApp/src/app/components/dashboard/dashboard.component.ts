@@ -52,4 +52,8 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['todo/new', { groupId: this.groupId }] )
   }
 
+  delete(todoId: number) {
+      this.todos = this.todos.filter(elem => elem.id != todoId)
+  }
+
 }

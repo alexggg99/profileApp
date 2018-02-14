@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 
 import { routing } from './app.routing'
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
+import { TodoComponent } from "./components/dashboard/todo.component.ts/todo.component";
 import { AppComponent } from './app.component';
 import { SidenavResponsive } from "./components/sidenav-responsive/sidenav-responsive";
 import { LoginComponent } from './components/login/login.component';
@@ -97,7 +98,7 @@ export class MaterialModule {}
 
 @NgModule({
   declarations: [
-    AppComponent, DashboardComponent, LoginComponent,
+    AppComponent, DashboardComponent, TodoComponent, LoginComponent,
     SidenavResponsive, DetailsComponent, PageNotFound
   ],
   imports: [
