@@ -1,13 +1,15 @@
 package agashchuk.rest;
 
 import agashchuk.model.Todo;
+import agashchuk.profileserver.security.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -27,6 +29,14 @@ public class TodoController {
     @RequestMapping("/{id}")
     public Todo getTodo(@PathVariable long id) {
         return todoRepository.findOne(id);
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<Void> saveTodo(@RequestBody Todo todo, Principal principal) {
+        todo.setCreatedAt(new Date());
+        todo.setUser((User) ((UsernamePasswordAuthenticationToken) principal).getPrincipal());
+        todoRepository.save(todo);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)

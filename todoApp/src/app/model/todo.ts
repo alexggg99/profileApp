@@ -1,32 +1,22 @@
-export class Todo {
-    private id: number;
-    private _title: string;
-    private user: string;
-    private createdAt: string;
-    private _done: boolean;
+import {Group} from "./group";
 
-    constructor(id: number, title: string, user: string, createdAt: string, done: boolean) {
+export class Todo {
+    id: number;
+    title: string;
+    user: string;
+    group: Group;
+    createdAt: string;
+    done: boolean;
+    description: string;
+
+    constructor(id?: number, title?: string, description?: string,  done?: boolean, group?: Group, user?: string, createdAt?: string) {
         this.id = id;
-        this._title = title;
+        this.title = title;
         this.user = user;
         this.createdAt = createdAt;
-        this._done = done;
+        this.done = done;
+        this.description = description;
+        this.group = group;
     }
 
-
-    get title(): string {
-        return this._title;
-    }
-
-    set title(value: string) {
-        this._title = value;
-    }
-
-    get done(): boolean {
-        return this._done;
-    }
-
-    set done(value: boolean) {
-        this._done = value;
-    }
 }

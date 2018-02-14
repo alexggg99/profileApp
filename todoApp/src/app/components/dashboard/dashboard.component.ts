@@ -13,10 +13,6 @@ import {TodoService} from "../../services/todo.service";
 })
 export class DashboardComponent implements OnInit {
 
-  private credential = {'username': '', 'password': ''}
-  private loggedId = false;
-  private badCredentials = false;
-
   private groupId: number;
   private todos: Todo[] = [];
 
@@ -28,12 +24,15 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.loginService.checkSession().subscribe(
-      res => {
-        this.loggedId = true;
-      },
+        res => {
+        },
         error => {
-          this.loggedId = false;
-      }
+          if (localStorage.getItem('xAuthToken')) {
+              localStorage.removeItem('xAuthToken')
+              location.reload();
+              this.router.navigate([]);
+          }
+        }
     );
     this.activeRouter.params.forEach((params:Params) => {
       if (params['id'] != undefined) {
@@ -50,7 +49,7 @@ export class DashboardComponent implements OnInit {
   }
 
   addTodo() {
-    this.router.navigate(['new', { groupId: this.groupId }] )
+    this.router.navigate(['todo/new', { groupId: this.groupId }] )
   }
 
 }

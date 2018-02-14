@@ -3,13 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 
 import { routing } from './app.routing'
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { AppComponent } from './app.component';
 import { SidenavResponsive } from "./components/sidenav-responsive/sidenav-responsive";
 import { LoginComponent } from './components/login/login.component';
+import { PageNotFound } from "./not-found.component";
 import {DetailsComponent} from "./components/dashboard/todo-details/details.component";
 import { LoginService } from "./services/login.service";
 import { AuthGuardService } from "./services/auth-guard.service";
@@ -96,12 +97,14 @@ export class MaterialModule {}
 
 @NgModule({
   declarations: [
-    AppComponent, DashboardComponent, LoginComponent, SidenavResponsive, DetailsComponent
+    AppComponent, DashboardComponent, LoginComponent,
+    SidenavResponsive, DetailsComponent, PageNotFound
   ],
   imports: [
       BrowserModule,
       BrowserAnimationsModule,
       FormsModule,
+      ReactiveFormsModule,
       HttpClientModule,
       MaterialModule,
       MatNativeDateModule,

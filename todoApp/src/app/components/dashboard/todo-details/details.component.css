@@ -1,7 +1,7 @@
 .container-todo-details {
     padding: 12px;
     height: 97%;
-    width: 60%;
+    width: 40%;
     margin: auto;
 }
 
@@ -20,12 +20,13 @@
 }
 
 
-.example-form {
+.form {
     min-width: 150px;
     max-width: 500px;
     width: 100%;
+    margin: auto;
 }
 
-.example-full-width {
+.full-width {
     width: 100%;
 }

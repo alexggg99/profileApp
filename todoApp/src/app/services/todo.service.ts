@@ -27,4 +27,9 @@ export class TodoService {
         return this.http.get<Todo[]>(url, {params: new HttpParams().append('groupId', '' + id)});
   }
 
+  saveTodo(todo: Todo) {
+    let url = this.config.serverTodo + '/todo'
+    return this.http.post<Todo>(url, todo);
+  }
+
 }
