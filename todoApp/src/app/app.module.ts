@@ -28,8 +28,8 @@ import {TodoModule} from "./components/dashboard/todo.module";
       BrowserAnimationsModule,
       HttpClientModule,
       MaterialModule,
-      AppRoutingModule,
-      TodoModule
+      TodoModule,
+      AppRoutingModule
   ],
   providers: [
       LoginService,
