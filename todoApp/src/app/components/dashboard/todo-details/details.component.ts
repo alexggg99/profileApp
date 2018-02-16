@@ -57,7 +57,7 @@ export class DetailsComponent implements OnInit {
             groupId = Number.parseInt(params['groupId']);
         }
     });
-    this.router.navigate(['group/' + groupId] )
+    this.router.navigate(['../'])
   }
 
 }
