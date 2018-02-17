@@ -29,3 +29,7 @@ todo-row {
     margin-right: 10px;
     cursor: pointer;
 }
+
+.todo-done-text {
+    text-decoration: line-through;
+}

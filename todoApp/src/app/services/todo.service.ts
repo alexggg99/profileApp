@@ -33,6 +33,11 @@ export class TodoService {
     return this.http.post<Todo>(this.url, todo);
   }
 
+  updateTodo(todo: Todo) {
+    let url = this.url + '/' + todo.id;
+    return this.http.put(url, todo);
+  }
+
   deleteTodo(todoId: number) {
     let url = this.url + '/'+todoId;
     return this.http.delete<number>(url);

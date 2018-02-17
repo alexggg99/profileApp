@@ -11,11 +11,19 @@ export class TodoComponent implements OnInit {
 
   @Input('todo') todo: Todo;
   @Input('groupId') groupId: number;
-  @Output() onDelete = new EventEmitter<number>()
+  @Output() onDelete = new EventEmitter<number>();
+
+  private isDone: boolean = false;
 
   constructor(private todoService: TodoService) { }
 
   ngOnInit() {
+    this.isDone = this.todo.done;
+  }
+
+  done() {
+    this.todoService.updateTodo(this.todo).subscribe();
+    this.isDone = !this.isDone;
   }
 
   delete(todoId: number) {

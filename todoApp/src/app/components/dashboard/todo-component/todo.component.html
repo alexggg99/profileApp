@@ -1,7 +1,7 @@
 <div class="todo-flex">
-  <div class="todo-row-container">
-    <input type="checkbox" class="done-checkbox"/> {{todo.title}}
+  <div class="todo-row-container" [class.todo-done-text]="isDone">
+    <input type="checkbox" class="done-checkbox" (change)="done()" [(ngModel)]="todo.done"/> {{todo.title}}
   </div>
-  <i class="material-icons edit" [routerLink]="['/todo', groupId, todo.id]">edit</i>
-  <i class="material-icons delete" (click)="delete(todo.id)">delete</i>
+  <i class="material-icons edit" [routerLink]="isDone ? null : ['/todo', groupId, todo.id]">edit</i>
+  <i class="material-icons delete" (click)="isDone ? null : delete(todo.id)">delete</i>
 </div>
