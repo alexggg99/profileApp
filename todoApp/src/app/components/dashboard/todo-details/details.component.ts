@@ -19,11 +19,10 @@ export class DetailsComponent implements OnInit {
     @HostBinding('style.position')  position = 'absolute';
     @HostBinding('style.width')  width = '100%';
 
-  @Input() todo: Todo;
-
+  model: Todo;
   formInvalid: boolean = false;
+  groupId: any;
   groups: Group[] = [];
-  model: Todo = new Todo();
 
   constructor(private groupService: GroupService,
               private router: Router,
@@ -32,15 +31,28 @@ export class DetailsComponent implements OnInit {
               private auth: AuthGuardService) { }
 
   ngOnInit() {
+    this.groupId = +this.activeRouter.snapshot.paramMap.get('groupId');
     this.groupService.getGroups().subscribe(
         res => {
           res.forEach(group => this.groups.push(group));
         }
-    )
+    );
+    let todoId = Number.parseInt(this.activeRouter.snapshot.paramMap.get('id'));
+    if (todoId && todoId > 0) {
+        this.todoService.getTodo(todoId).toPromise().then(res => {
+            this.model = res;
+        })
+    } else {
+        this.model = new Todo(null, null, null, false, {id: this.groupId, name: null, url: null});
+    }
   }
 
+    compareGroups(g1: Group, g2: Group): boolean {
+        return g1 && g2 ? g1.id === g2.id : g1 === g2;
+    }
+
   onSubmit() {
-      console.log(JSON.stringify(this.model))
+      // this.model.group = new Group({1, 'test'})
       this.todoService.saveTodo(this.model).subscribe(
           res => {
               this.router.navigate(['group/' + this.model.group.id] )
@@ -50,14 +62,9 @@ export class DetailsComponent implements OnInit {
       )
   }
 
-  back() {
-    let groupId = 1;
-    this.activeRouter.params.forEach((params:Params) => {
-        if (params['groupId'] != undefined) {
-            groupId = Number.parseInt(params['groupId']);
-        }
-    });
-    this.router.navigate(['../'])
+  back(event: Event) {
+      event.preventDefault();
+      this.router.navigate(['/group/' + this.groupId]);
   }
 
 }

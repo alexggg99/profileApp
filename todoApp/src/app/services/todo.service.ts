@@ -21,7 +21,7 @@ export class TodoService {
   }
 
   getTodo(id:number) {
-    let url = this.url + '/todo/'+id;
+    let url = this.url + '/' + id;
     return this.http.get<Todo>(url);
   }
 

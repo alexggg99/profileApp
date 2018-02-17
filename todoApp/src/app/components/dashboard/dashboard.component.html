@@ -1,13 +1,13 @@
 <div class="container-todo">
     <div class="container-todo Aligner-item--top">
       <mat-grid-list cols="1" rowHeight="36px" >
-          <mat-grid-tile *ngFor="let todo of todos">
-              <todo-row style='width: 100%' [todo]="todo" (onDelete)="delete($event)"></todo-row>
+          <mat-grid-tile *ngFor="let todo of todos$ | async as todo">
+              <todo-row style='width: 100%' [todo]="todo" [groupId]="groupId" (onDelete)="delete($event)"></todo-row>
           </mat-grid-tile>
       </mat-grid-list>
     </div>
     <div class="container-todo Aligner-item--bottom">
-        <button mat-fab (click)="addTodo()">Basic</button>
+        <button mat-fab [routerLink]="['/todo', groupId, -1]">Basic</button>
     </div>
 </div>
 

@@ -10,6 +10,7 @@ import { TodoService } from "../../../services/todo.service";
 export class TodoComponent implements OnInit {
 
   @Input('todo') todo: Todo;
+  @Input('groupId') groupId: number;
   @Output() onDelete = new EventEmitter<number>()
 
   constructor(private todoService: TodoService) { }

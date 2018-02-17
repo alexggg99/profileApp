@@ -6,11 +6,7 @@ import { DashboardComponent } from "./dashboard.component";
 import { DetailsComponent } from "./todo-details/details.component";
 
 const todoRoutes: Routes = [
-    {   path: 'todo/:id',
-        component: DetailsComponent,
-        canActivate: [AuthGuardService]
-    },
-    {   path: 'todo/new',
+    {   path: 'todo/:groupId/:id',
         component: DetailsComponent,
         canActivate: [AuthGuardService]
     },

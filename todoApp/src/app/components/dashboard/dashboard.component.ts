@@ -1,10 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../services/login.service';
-import {Params, Router} from '@angular/router';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router, ParamMap} from '@angular/router';
 import {AuthGuardService} from "../../services/auth-guard.service";
 import {Todo} from "../../model/todo";
 import {TodoService} from "../../services/todo.service";
+import { Observable } from 'rxjs/Observable';
+
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/interval';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/take';
 
 @Component({
   selector: 'dashboard',
@@ -14,7 +20,7 @@ import {TodoService} from "../../services/todo.service";
 export class DashboardComponent implements OnInit {
 
   private groupId: number;
-  private todos: Todo[] = [];
+  private todos$: Observable<Todo[]>;
 
   constructor(private loginService: LoginService,
               private router: Router,
@@ -25,6 +31,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.loginService.checkSession().subscribe(
         res => {
+          this.getTodos();
         },
         error => {
           if (localStorage.getItem('xAuthToken')) {
@@ -34,26 +41,20 @@ export class DashboardComponent implements OnInit {
           }
         }
     );
-    this.activeRouter.params.forEach((params:Params) => {
-      if (params['id'] != undefined) {
-        this.groupId = Number.parseInt(params['id']);
-      } else {
-        this.groupId = 1;
-      }
-      this.todos = [];
-      this.todoService.getTodoByGroupId(this.groupId).subscribe(res => res.forEach(todo => this.todos.push(todo)))
-    })
   }
 
-  editDetails() {
+  getTodos() {
+      this.todos$ = this.activeRouter.paramMap
+          .switchMap((params: ParamMap) => {
+              this.groupId = +params.get('id');
+              return this.todoService.getTodoByGroupId(this.groupId);
+          });
   }
 
-  addTodo() {
-    this.router.navigate(['todo/new', { groupId: this.groupId }] )
-  }
 
   delete(todoId: number) {
-      this.todos = this.todos.filter(elem => elem.id != todoId)
+      this.getTodos();
+      console.log('Todo #' + todoId + ' deleted.') //log it
   }
 
 }
