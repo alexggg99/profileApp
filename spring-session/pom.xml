@@ -21,9 +21,9 @@
 
 	<modules>
 		<module>profile-server</module>
-		<module>book-resource</module>
 		<module>todo-resource</module>
 		<module>common-module</module>
+		<module>car-resource</module>
 	</modules>
 	
 </project>
