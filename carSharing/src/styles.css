@@ -1,0 +1,38 @@
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+body {
+    font-family: 'Muli', sans-serif;
+    margin: 0;
+}
+
+html, body {
+    margin:0;
+    padding:0;
+    height:100%;
+}
+
+.container {
+    background: #f2f2f2;
+    width: 85%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+@media (max-width: 672px) {
+    .container {
+        width: 100%;
+    }
+}
+
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}

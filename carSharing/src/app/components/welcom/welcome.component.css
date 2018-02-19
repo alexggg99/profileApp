@@ -1,0 +1,10 @@
+.aligner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text-container {
+    padding: 15px !important;
+}
+
