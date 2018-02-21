@@ -1,7 +1,5 @@
-package com.agashchuk;
+package agashchuk;
 
-import com.agashchuk.model.Car;
-import com.agashchuk.model.CarRepository;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -43,17 +41,17 @@ public class CarResource extends WebSecurityConfigurerAdapter {
 		SpringApplication.run(CarResource.class, args);
 	}
 
-	@Bean
-	ApplicationRunner init(CarRepository repository) {
-		return args -> {
-			Stream.of("Ferrari", "Jaguar", "Porsche", "Lamborghini", "Bugatti",
-					"AMC Gremlin", "Triumph Stag", "Ford Pinto", "Yugo GV").forEach(name -> {
-				Car car = new Car();
-				car.setName(name);
-				repository.save(car);
-			});
-			repository.findAll().forEach(System.out::println);
-		};
-	}
+//	@Bean
+//	ApplicationRunner init(CarRepository repository) {
+//		return args -> {
+//			Stream.of("Ferrari", "Jaguar", "Porsche", "Lamborghini", "Bugatti",
+//					"AMC Gremlin", "Triumph Stag", "Ford Pinto", "Yugo GV").forEach(name -> {
+//				Car car = new Car();
+//				car.setName(name);
+//				repository.save(car);
+//			});
+//			repository.findAll().forEach(System.out::println);
+//		};
+//	}
 
 }
