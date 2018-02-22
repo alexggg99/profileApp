@@ -3,6 +3,8 @@ import { Routes, RouterModule } from "@angular/router";
 import { LoginComponent } from "./components/login/login.component";
 import { PageNotFound } from "./not-found.component";
 import {WelcomeComponent} from "./components/welcom/welcome.component";
+import {SharingListComponent} from "./components/sharing-list/sharing-list.component";
+import {AuthGuardService} from "./services/auth-guard.service";
 
 const appRoutes: Routes = [
   {
@@ -13,7 +15,12 @@ const appRoutes: Routes = [
       path: 'welcome',
       component: WelcomeComponent
   },
-  { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+    {
+        path: 'sharing-list',
+        component: SharingListComponent,
+        canActivate: [AuthGuardService]
+    },
+  { path: '', redirectTo: 'sharing-list', pathMatch: 'full' },
   { path: '**', component: PageNotFound }
 ];
 

@@ -1,5 +1,6 @@
 package agashchuk.model;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,7 +20,12 @@ public class Trip {
     @Column(name = "source_point")
     private @NonNull String sourcePoint;
     private @NonNull String destination;
-    @ManyToOne
+    @JsonView(Public.class)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "car_id")
     private @NonNull Car car;
+
+    public static class Public {
+        public String model;
+    }
 }

@@ -7,6 +7,10 @@
     margin-right: 5px;
 }
 
+.paddingLeft5 {
+    margin-left: 5px;
+}
+
 .label {
     padding: 0;
     min-width: 0;

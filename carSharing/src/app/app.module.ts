@@ -15,12 +15,18 @@ import { AuthGuardService } from "./services/auth-guard.service";
 import { httpInterceptorProviders} from "./components/interceptors/index";
 import { APP_CONFIG, END_POINT_CONFIG } from "./services/app.config";
 import {MaterialModule} from "./material.module";
+import {SharingListComponent} from "./components/sharing-list/sharing-list.component";
+import {CarService} from "./services/car.service";
+import {TripService} from "./services/trip.service";
+import {SharingListItemComponent} from "./components/sharing-list/sharing-list-item/sharing-list-item.component";
 
 
 @NgModule({
   declarations: [
     AppComponent, LoginComponent,
-     PageNotFound, WelcomeComponent
+     PageNotFound, WelcomeComponent,
+     SharingListComponent,
+      SharingListItemComponent
   ],
   imports: [
       BrowserModule,
@@ -32,6 +38,8 @@ import {MaterialModule} from "./material.module";
   providers: [
       LoginService,
       AuthGuardService,
+      CarService,
+      TripService,
       httpInterceptorProviders,
       { provide: APP_CONFIG, useValue: END_POINT_CONFIG }
   ],

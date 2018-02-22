@@ -14,7 +14,7 @@ public class Car {
     private Long id;
     private @NonNull String model;
     private @NonNull int seats;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 }

@@ -1,12 +1,12 @@
 <div class="container">
     <div class="navmenu">
-        <button mat-icon-button routerLink="/">
-            <mat-icon>near_me</mat-icon>
+        <button mat-button class="paddingLeft5" [routerLink]='isLogged ? "sharing-list" :"welcome"'>
+            <span>Car Sharing Service </span><mat-icon>near_me</mat-icon>
         </button>
-        <button mat-icon-button class="paddingRight5" *ngIf="!isLogged" routerLink="/login">
+        <button mat-button class="paddingRight5" *ngIf="!isLogged" routerLink="/login">
             <span>login</span>
         </button>
-        <button mat-icon-button class="paddingRight5" *ngIf="isLogged" (click)="logout($event)">
+        <button mat-button class="paddingRight5" *ngIf="isLogged" (click)="logout($event)">
             <span>logout</span>
         </button>
     </div>
