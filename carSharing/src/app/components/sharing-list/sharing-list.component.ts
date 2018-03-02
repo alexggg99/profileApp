@@ -32,8 +32,16 @@ export class SharingListComponent implements OnInit {
     }
 
   loadTrips(pageIndex: number, pageSize: number) {
-      this.tripService.getTrips(pageIndex, pageSize).subscribe(res => {
-          this.trips = res
+      this.tripService.getTrips(pageIndex, pageSize).subscribe(res1 => {
+          this.trips = res1;
+          this.trips.forEach(trip => {
+              this.tripService.getUserTrips(trip.id).subscribe(
+                  res2 => {
+                      trip.joined = res2.joined;
+                      trip.users = res2.users;
+                  }
+              )
+          })
       });
   }
 

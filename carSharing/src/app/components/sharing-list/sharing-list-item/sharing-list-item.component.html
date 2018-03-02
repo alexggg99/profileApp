@@ -52,7 +52,9 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-    <button mat-button class="join-button">Join</button>
+    <button mat-button class="join-button" (click)="join(trip.id)" *ngIf="!trip.joined">Join</button>
+    <button mat-button class="join-button" (click)="disjoint(trip.id)" *ngIf="trip.joined">Disjoint</button>
+    <span *ngFor="let user of trip.users"> {{user.username}} </span>
 
     <mat-action-row>
       <button mat-button color="warn" (click)="prevStep()">Previous</button>
